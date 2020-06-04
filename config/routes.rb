@@ -17,14 +17,14 @@ Rails.application.routes.draw do
 
     get '/' => 'homes#top'
 
-      # admin/productsコントローラ
-      resources :products, only: [:index, :new, :show, :edit, :create, :update]
-      # admin/categoriesコントローラ
-      resources :categories, only: [:index, :edit, :create, :update]
-      # admin/customersコントローラ
-      resources :customers, only: [:index, :show, :edit, :update]
-      # admin/ordersコントローラ
-      resources :orders, only: [:index, :show, :update]
+    # admin/productsコントローラ
+    resources :products, only: [:index, :new, :show, :edit, :create, :update]
+    # admin/categoriesコントローラ
+    resources :categories, only: [:index, :edit, :create, :update]
+    # admin/customersコントローラ
+    resources :customers, only: [:index, :show, :edit, :update]
+    # admin/ordersコントローラ
+    resources :orders, only: [:index, :show, :update]
 
   end
 
