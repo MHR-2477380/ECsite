@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   #　管理者側のルーティング
   namespace :admins do
 
+    # homesコントローラ
     get '/' => 'homes#top'
 
     # admin/productsコントローラ
@@ -42,7 +43,7 @@ Rails.application.routes.draw do
 
     # shipping_addressesコントローラ
     resources :shipping_addresses, only: [:index, :edit, :update, :destroy, :create]
-    #productsコントローラ
+    # productsコントローラ
     resources :products, only: [:index, :show]
     # cart_itemsコントローラ
     resources :cart_items, only: [:index, :create, :destroy, :update]
