@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   namespace :customers do
 
     # homesコントローラ
-    get '/' => 'homes#top'
+    get 'top' => 'homes#top'
     get 'about' => 'homes#about'
 
     # customersコントローラ-
@@ -54,6 +54,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :new, :create]
 
   end
+
+  root "customers/homes#top"
 
    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
