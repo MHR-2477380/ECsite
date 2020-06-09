@@ -14,8 +14,20 @@
         <nav class="navbar navbar-main navbar-shadow" role="navigation" id="slide-nav">
             <div class="container">
                 <div class="navbar-header">
-                    <p>KOGANEI coffee</p>
+                    <!-- ユーザーによりリンク先を変更する -->
+                    <% if(current_admin) %>
+                        <!-- 管理者 -->
+                        <%= link_to(admin_path) do %>
+                            <div class="navbar-brand">KOGANEI cooffe</div>
+                        <% end %>
+                    <% else %>
+                        <!-- 顧客 -->
+                        <%= link_to(root_path) do %>
+                            <div class="navbar-brand">KOGANEI cooffe</div>
+                        <% end %>
+                    <% end %>
                 </div>
+
                 <div id="slidemenu">
                     <ul class="nav navbar-nav navbar-right">
 
@@ -53,6 +65,7 @@
 
                         <!-- その他 -->
                         <% else %>
+
                             <li>
                                 <%= link_to("KOGANEI coffee", customers_about_path) %>
                             </li>
