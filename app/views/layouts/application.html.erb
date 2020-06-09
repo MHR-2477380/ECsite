@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ECsite</title>
+    <title>KOGANEI coffee</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,79 @@
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+    <header>
+        <nav class="navbar navbar-main navbar-shadow" role="navigation" id="slide-nav">
+            <div class="container">
+                <div class="navbar-header">
+                    <p>KOGANEI coffee</p>
+                </div>
+                <div id="slidemenu">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <!-- 顧客 -->
+                        <% if(current_customer) %>
+
+                            <li>
+                                <%= link_to("#{current_customer.first_name}様", "/customer/#{current_customer.id}") %>
+                            </li>
+                            <li>
+                                <%= link_to("ログアウト", destroy_customer_session_path, method: :delete) %>
+                            </li>
+                            <li>
+                                <%= link_to("カートを見る", customers_cart_items_path) %>
+                            </li>
+
+                        <!-- 管理者 -->
+                        <% elsif(current_admin) %>
+
+                            <li>
+                                <%= link_to("商品一覧", admins_products_path) %>
+                            </li>
+                            <li>
+                                <%= link_to("会員一覧", admins_customers_path) %>
+                            </li>
+                            <li>
+                                <%= link_to("注文履歴一覧", admins_orders_path) %>
+                            </li>
+                            <li>
+                                <%= link_to("ジャンル管理", admin_categories_path) %>
+                            </li>
+                            <li>
+                                <%= link_to("ログアウト", destroy_admin_session_path, method: :delete) %>
+                            </li>
+
+                        <!-- その他 -->
+                        <% else %>
+                            <li>
+                                <%= link_to("KOGANEI coffeeについて", customers_about_path) %>
+                            </li>
+                            <li>
+                                <%= link_to("ログイン", new_customer_session_path) %>
+                            </li>
+                            <li>
+                                <%= link_to("会員登録はこちら", new_customer_registration_path) %>
+                            </li>
+
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="body">
+      <div class="container">
+        <p class="notice"><%= notice %></p>
+        <div class="row">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-center text-muted">©KOGANEI coffee</p>
+        </div>
+    </footer>
+ </body>
 </html>
