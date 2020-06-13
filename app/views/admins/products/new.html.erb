@@ -1,0 +1,55 @@
+<h3> 商品　新規登録画面 </h3>
+
+<% if @product.errors.any? %>
+    <div id="error_explanation">
+        <h4>【 入力されていない項目があります。 】</h4>
+    </div>
+<% end %>
+
+<div class="row">
+    <%= form_with(model: @product, url: admins_products_path, local: true) do |f| %>
+
+        <div class="col-sm-6">
+            <%= f.attachment_field(:product_image) %>
+        </div>
+
+        <div class="col-sm-6">
+
+            <div class="product_new_field">
+                <div class="new_title">商品名</div>
+                <div class="new_content"><%= f.text_field(:name) %></div>
+            </div>
+
+            <div class="product_new_field">
+                <div class="new_title">商品説明</div>
+                <div class="new_content"><%= f.text_area(:content) %></div>
+            </div>
+
+            <div class="product_new_field">
+                <!-- ジャンル名を表示させるためにカテゴリーモデルからデータをひっぱってくる　-->
+                <div class="new_title">ジャンル</div>
+                <div class="new_content">
+                    <%= f.collection_select(:category_id, @active_category, :id, :name, include_blank: "選択して下さい" ) %>
+                </div>
+            </div>
+
+            <div class="product_new_field">
+                <div class="new_title">税抜価格</div>
+                <div class="new_content"><%= f.text_field(:price) %> 円 </div>
+            </div>
+
+            <div class="product_new_field">
+                <div class="new_title">販売ステータス</div>
+                <div class="new_content">
+                    <%= f.select(:is_active, [["販売中", true],["売り切れ", false]] , include_blank: "選択して下さい") %>
+                </div>
+            </div>
+
+            <div class="product_new_action">
+                <%= f.submit("新規登録", class: "btn btn-primary") %>
+            </div>
+
+        </div>
+
+    <% end %>
+</div>
