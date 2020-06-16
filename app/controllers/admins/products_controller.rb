@@ -14,6 +14,15 @@ class Admins::ProductsController < ApplicationController
 	end
 
 	def create
+        @product = Product.new(product_params)
+        if @product.save
+            flash[:notice] = "商品を登録しました。"
+            redirect_to(admins_product_path(@product))
+        else
+            @product = Product.new
+            @active_category = Category.where(is_active: true)
+            render(:new)
+        end
 	end
 
 	def edit
@@ -23,3 +32,8 @@ class Admins::ProductsController < ApplicationController
 	end
 
 end
+
+private
+    def product_params
+        params.require(:product).permit(:name, :content, :category_id, :price, :is_active, :product_image)
+    end
