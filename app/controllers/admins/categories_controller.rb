@@ -1,9 +1,17 @@
 class Admins::CategoriesController < ApplicationController
 
     def index
-    end
+        @category = Category.new
+        @categories = Category.all
+ 	end
 
     def create
+        @category = Category.new(category_params)
+        @categories = Category.all
+        if @category.save
+        else
+            render(:index)
+        end
     end
 
     def edit
@@ -13,3 +21,8 @@ class Admins::CategoriesController < ApplicationController
     end
 
 end
+
+private
+    def category_params
+        params.require(:category).permit(:name, :is_active)
+    end
