@@ -26,10 +26,21 @@ class Admins::ProductsController < ApplicationController
 	end
 
 	def edit
+        @product = Product.find(params[:id])
+        @active_category = Category.where(is_active: true)
 	end
 
 	def update
-	end
+        @product = Product.find(params[:id])
+        if @product.update(product_params)
+            flash[:notice] = "商品を編集しました。"
+            redirect_to admins_product_path(@product)
+        else
+            @product = Product.find(params[:id])
+            @active_category = Category.where(is_active: true)
+            render(:edit)
+        end
+    end
 
 end
 

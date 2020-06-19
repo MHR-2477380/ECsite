@@ -1,0 +1,51 @@
+<h3> 商品 編集画面 </h3>
+
+<% if @product.errors.any? %>
+    <div id="error_explanation">
+        <p>【 入力されていない項目があります。 】</p>
+    </div>
+<% end %>
+
+<div class="row">
+    <%= form_with(model: @product, url: admins_product_path(@product.id), local: true, method: :PATCH) do |f| %>
+
+        <div class="col-sm-4">
+            <%= attachment_image_tag(@product, :product_image, :fill, 250, 200, format: 'jpeg') %>
+            <%= f.attachment_field(:product_image) %>
+        </div>
+
+        <div class="col-sm-5">
+
+            <div>
+                <div>商品名</div>
+                <div><%= f.text_field(:name) %></div>
+            </div>
+
+            <div>
+                <div>商品説明</div>
+                <div><%= f.text_area(:content) %></div>
+            </div>
+
+            <div>
+                <div>ジャンル</div>
+                <div><%= f.collection_select(:category_id, @active_category, :id, :name)%></div>
+            </div>
+
+            <div>
+                <div>税抜価格</div>
+                <div><%= f.text_field(:price) %> 円</div>
+            </div>
+
+            <div>
+                <div>販売ステータス</div>
+                <div><%= f.select(:is_active, [["販売中", true],["売り切れ", false]] , include_blank: "選択して下さい") %></div>
+            </div>
+
+            <div class="col-sm-3">
+                <div><%= f.submit("変更を保存", class: "btn btn-primary") %></div>
+            </div>
+
+        </div>
+
+    <% end %>
+</div>

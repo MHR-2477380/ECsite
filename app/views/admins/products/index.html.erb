@@ -13,12 +13,12 @@
     </thead>
     <tbody>
         <% @products.each do |product| %>
-            <tr>
+            <tr class="text-center">
                 <td>
                     <%= product.id %>
                 </td>
                 <td>
-                    <%= link_to(product.name, admin_products_path(product.id)) %>
+                    <%= link_to(product.name, admins_products_path(product.id)) %>
                 </td>
                 <td>
                     <%= product.price %>
