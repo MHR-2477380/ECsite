@@ -15,37 +15,37 @@
 
         <div class="col-sm-6">
 
-            <div class="product_new_field">
-                <div class="new_title">商品名</div>
-                <div class="new_content"><%= f.text_field(:name) %></div>
+            <div>
+                <div>商品名</div>
+                <div><%= f.text_field(:name) %></div>
             </div>
 
-            <div class="product_new_field">
-                <div class="new_title">商品説明</div>
-                <div class="new_content"><%= f.text_area(:content) %></div>
+            <div>
+                <div>商品説明</div>
+                <div><%= f.text_area(:content) %></div>
             </div>
 
-            <div class="product_new_field">
+            <div>
                 <!-- ジャンル名を表示させるためにカテゴリーモデルからデータをひっぱってくる　-->
-                <div class="new_title">ジャンル</div>
-                <div class="new_content">
+                <div>ジャンル</div>
+                <div>
                     <%= f.collection_select(:category_id, @active_category, :id, :name, include_blank: "選択して下さい" ) %>
                 </div>
             </div>
 
-            <div class="product_new_field">
-                <div class="new_title">税抜価格</div>
-                <div class="new_content"><%= f.text_field(:price) %> 円 </div>
+            <div>
+                <div>税抜価格</div>
+                <div><%= f.text_field(:price) %> 円 </div>
             </div>
 
-            <div class="product_new_field">
-                <div class="new_title">販売ステータス</div>
-                <div class="new_content">
+            <div>
+                <div>販売ステータス</div>
+                <div>
                     <%= f.select(:is_active, [["販売中", true],["売り切れ", false]] , include_blank: "選択して下さい") %>
                 </div>
             </div>
 
-            <div class="product_new_action">
+            <div>
                 <%= f.submit("新規登録", class: "btn btn-primary") %>
             </div>
 
