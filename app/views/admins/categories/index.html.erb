@@ -1,0 +1,11 @@
+<h3> ジャンル追加・一覧画面 </h3>
+
+<!-- 新規登録フォーム -->
+<div id="category_new">
+    <%= render 'admins/categories/new', category: @category %>
+</div>
+
+<!-- カテゴリー一覧表示 -->
+<div id="category_index">
+    <%= render 'admins/categories/index', categories: @categories %>
+</div>
