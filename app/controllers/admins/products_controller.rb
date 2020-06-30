@@ -1,8 +1,7 @@
 class Admins::ProductsController < ApplicationController
 
 	def index
-		@products = Product.order(created_at: :asc).page(params[:page])
-	end
+		@products = Product.order("created_at DESC")
 
 	def new
         @product = Product.new
