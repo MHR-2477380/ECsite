@@ -37,25 +37,27 @@ class Admins::OrdersController < ApplicationController
             end
 
         else
+
             # false: 製作ステータスが変更された場合
             # f.selectから送られてくるparamsはstring型なのでinteger型に変換する
             params[:ordered_item][:status] = params[:ordered_item][:status].to_i
 
             case params[:ordered_item][:status]
-            # 注文商品のどれか一つが2: 製作中に変更された場合、注文ステータスを2: 製作中に変更する
-            when 2
-                ordered_item = OrderedItem.find_by(id: params[:ordered_item][:item_id])
-                ordered_item.update(ordered_item_params)
-                order.update(status: 2)
-                redirect_to(admin_order_path(order.id))
-            #　注文商品のどれか一つが3: 製作完了に変更された場合の分岐
-            when 3
-                ordered_item = OrderedItem.find_by(id: params[:ordered_item][:item_id])
-                ordered_item.update(ordered_item_params)
 
-                # ordered_items のステータスが全て、3: 製作完了になった場合、注文ステータスを3: 発送準備中に変更する
-                # item.statusだと定義したstring型の方が呼ばれるので_before_type_castをつけてinteger型にする
-                if ordered_items.all? do |item|
+                # 注文商品のどれか一つが2: 製作中に変更された場合、注文ステータスを2: 製作中に変更する
+                when 2
+                    ordered_item = OrderedItem.find_by(id: params[:ordered_item][:item_id])
+                    ordered_item.update(ordered_item_params)
+                    order.update(status: 2)
+                    redirect_to(admin_order_path(order.id))
+
+                #　注文商品のどれか一つが3: 製作完了に変更された場合の分岐
+                when 3
+                    ordered_item = OrderedItem.find_by(id: params[:ordered_item][:item_id])
+                    ordered_item.update(ordered_item_params)
+                    # ordered_items のステータスが全て、3: 製作完了になった場合、注文ステータスを3: 発送準備中に変更する
+                    # item.statusだと定義したstring型の方が呼ばれるので_before_type_castをつけてinteger型にする
+                    if ordered_items.all? do |item|
                         item.status_before_type_cast == 3
                     end
                     order.update(status: 3)
