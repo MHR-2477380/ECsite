@@ -9,11 +9,11 @@ class Admins::ProductsController < ApplicationController
         @active_category = Category.where(is_active: true)
     end
 
-	def show
+    def show
         @product = Product.find(params[:id])
-	end
+    end
 
-	def create
+    def create
         @product = Product.new(product_params)
         if @product.save
             flash[:notice] = "商品を登録しました。"
@@ -23,14 +23,14 @@ class Admins::ProductsController < ApplicationController
             @active_category = Category.where(is_active: true)
             render(:new)
         end
-	end
+    end
 
-	def edit
+    def edit
         @product = Product.find(params[:id])
         @active_category = Category.where(is_active: true)
-	end
+    end
 
-	def update
+    def update
         @product = Product.find(params[:id])
         if @product.update(product_params)
             flash[:notice] = "商品を編集しました。"
