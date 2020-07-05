@@ -1,9 +1,10 @@
 class Admins::ProductsController < ApplicationController
 
-	def index
-		@products = Product.order("created_at DESC")
+    def index
+        @products = Product.order("created_at DESC")
+    end
 
-	def new
+    def new
         @product = Product.new
         @active_category = Category.where(is_active: true)
     end

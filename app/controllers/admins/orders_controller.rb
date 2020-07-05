@@ -1,8 +1,8 @@
 class Admins::OrdersController < ApplicationController
 
-	def index
-		# 注文日が新しい順番に表示
-		@orders = Order.order("created_at DESC")
+    def index
+        # 注文日が新しい順番に表示
+        @orders = Order.order("created_at DESC")
 	end
 
 	def show
@@ -62,6 +62,6 @@ class Admins::OrdersController < ApplicationController
                 redirect_to(admin_order_path(order.id))
             end
         end
-	end
+    end
 
 end
